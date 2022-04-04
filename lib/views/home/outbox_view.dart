@@ -1,40 +1,57 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
-// import 'home_app_bar.dart';
-// import 'home_screen_tabs.dart';
+import 'home_app_bar.dart';
+import 'home_screen_tabs.dart';
 
-// class OutboxView extends HomeScreenTabView {
-//   const OutboxView({Key? key, required Widget child})
-//       : super(key: key, child: child);
+class OutboxView extends HomeScreenTabView {
+  const OutboxView() : super(tab: HomeScreenTab.outbox);
 
-//   @override
-//   Widget controller({required Widget child}) {
-//     return DefaultTabController(length: 3, child: child);
-//   }
+  @override
+  Widget container({required Widget child}) {
+    return DefaultTabController(length: 3, child: child);
+  }
 
-//   @override
-//   Widget body() {
-//     return const _OutboxBody();
-//   }
+  @override
+  Widget body(context) {
+    return const _OutboxBody();
+  }
 
-//   @override
-//   PreferredSizeWidget appBar() {
-//     return HomeAppBar(
-//       title: const Text('Outbox'),
-//       actions: [
-//         IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-//       ],
-//     );
-//   }
-// }
+  @override
+  PreferredSizeWidget appBar(context) {
+    return HomeAppBar(
+      bottom: const TabBar(
+        tabs: [
+          Tab(text: 'Sent'),
+          Tab(text: 'Scheduled'),
+          Tab(
+            text: 'Draft',
+          )
+        ],
+      ),
+      actions: [
+        IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+      ],
+    );
+  }
+}
 
-// class _OutboxBody extends StatelessWidget {
-//   const _OutboxBody({Key? key}) : super(key: key);
+class _OutboxBody extends StatelessWidget {
+  const _OutboxBody({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Center(
-//       child: Text('Outbox'),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return const TabBarView(
+      children: [
+        Center(
+          child: Text('Sent'),
+        ),
+        Center(
+          child: Text('Scheduled'),
+        ),
+        Center(
+          child: Text('Draft'),
+        ),
+      ],
+    );
+  }
+}
