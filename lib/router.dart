@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_app_bar/screens/home_screen.dart';
+import 'package:flutter_custom_app_bar/screens/inbox_screen.dart';
+import 'package:flutter_custom_app_bar/screens/insights_screen.dart';
+import 'package:flutter_custom_app_bar/screens/outbox_screen.dart';
 import 'package:go_router/go_router.dart';
-
-import 'views/home/home_screen_tabs.dart';
 
 final GoRouter router = GoRouter(
   routes: <GoRoute>[
     GoRoute(
       path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        final args = state.extra as HomeScreenArguments? ??
-            HomeScreenArguments(HomeScreenTab.inbox);
-        return HomeScreen(args: args);
-      },
+      redirect: (state) => '/inbox',
+    ),
+    GoRoute(
+      path: '/inbox',
+      builder: (context, state) => const InboxScreen(),
+    ),
+    GoRoute(
+      path: '/outbox',
+      builder: (context, state) => const OutboxScreen(),
+    ),
+    GoRoute(
+      path: '/insights',
+      builder: (context, state) => const InsightsScreen(),
     ),
   ],
 );
