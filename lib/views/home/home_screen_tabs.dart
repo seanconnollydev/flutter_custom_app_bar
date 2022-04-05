@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_app_bar/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
 import 'inbox_view.dart';
@@ -25,11 +26,8 @@ class HomeScreenScaffold extends StatelessWidget {
         currentIndex: tab.index,
         onTap: (index) {
           final tab = HomeScreenTab.values.firstWhere((t) => t.index == index);
-          final route = _getRoute(tab);
-          try {
-            context.pop();
-          } catch (e) {}
-          context.go(route);
+          context.go('/home/${tab.toString()}',
+              extra: HomeScreenArguments(tab));
         },
         items: const [
           BottomNavigationBarItem(
