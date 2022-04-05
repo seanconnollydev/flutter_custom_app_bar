@@ -4,7 +4,7 @@ import 'package:flutter_custom_app_bar/screens/insights_screen.dart';
 import 'package:flutter_custom_app_bar/screens/outbox_screen.dart';
 import 'package:go_router/go_router.dart';
 
-import 'views/home/home_screen_tabs.dart';
+import 'features/home/home_screen_scaffold.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: '/home',
