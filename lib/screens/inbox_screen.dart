@@ -10,6 +10,9 @@ class InboxScreen extends StatelessWidget {
       tab: HomeScreenTab.inbox,
       appBar: AppBar(
         title: const Text('Inbox'),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+        ],
       ),
       body: const Center(
         child: Text('Inbox'),

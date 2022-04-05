@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_app_bar/screens/home_screen.dart';
 import 'package:go_router/go_router.dart';
-
-import 'inbox_view.dart';
-import 'insights_view.dart';
-import 'outbox_view.dart';
 
 class HomeScreenScaffold extends StatelessWidget {
   final PreferredSizeWidget appBar;
@@ -26,65 +21,44 @@ class HomeScreenScaffold extends StatelessWidget {
         currentIndex: tab.index,
         onTap: (index) {
           final tab = HomeScreenTab.values.firstWhere((t) => t.index == index);
-          context.go('/home/${tab.toString()}',
-              extra: HomeScreenArguments(tab));
+          context.go('/home', extra: HomeScreenArguments(tab));
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mail),
-            label: 'Inbox',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.send),
-            label: 'Outbox',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.insights),
-            label: 'Insights',
-          ),
-        ],
+        items: _buildBottomNavigationBarItems(),
       ),
     );
   }
 }
 
-class HomeScreenTabView {
+class HomeScreenArguments {
   final HomeScreenTab tab;
-  const HomeScreenTabView({required this.tab});
 
-  Widget container({required Widget child}) {
-    return Container(child: child);
-  }
-
-  PreferredSizeWidget appBar(BuildContext context) {
-    return AppBar();
-  }
-
-  Widget body(BuildContext context) {
-    return Container();
-  }
-
-  static HomeScreenTabView getView({required HomeScreenTab tab}) {
-    switch (tab) {
-      case HomeScreenTab.inbox:
-        return const InboxView();
-      case HomeScreenTab.outbox:
-        return const OutboxView();
-      case HomeScreenTab.insights:
-        return const InsightsView();
-    }
-  }
+  HomeScreenArguments(this.tab);
 }
 
 enum HomeScreenTab { inbox, outbox, insights }
 
-String _getRoute(HomeScreenTab tab) {
+List<BottomNavigationBarItem> _buildBottomNavigationBarItems() {
+  return HomeScreenTab.values.map((tab) {
+    return _buildBottomNavigationItemForTab(tab);
+  }).toList();
+}
+
+BottomNavigationBarItem _buildBottomNavigationItemForTab(HomeScreenTab tab) {
   switch (tab) {
     case HomeScreenTab.inbox:
-      return '/inbox';
+      return const BottomNavigationBarItem(
+        icon: Icon(Icons.mail),
+        label: 'Inbox',
+      );
     case HomeScreenTab.outbox:
-      return '/outbox';
+      return const BottomNavigationBarItem(
+        icon: Icon(Icons.send),
+        label: 'Outbox',
+      );
     case HomeScreenTab.insights:
-      return '/insights';
+      return const BottomNavigationBarItem(
+        icon: Icon(Icons.insights),
+        label: 'Insights',
+      );
   }
 }

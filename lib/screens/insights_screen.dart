@@ -10,6 +10,12 @@ class InsightsScreen extends StatelessWidget {
       tab: HomeScreenTab.insights,
       appBar: AppBar(
         title: const Text('Insights'),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.calendar_today),
+          ),
+        ],
       ),
       body: const Center(
         child: Text('Insights'),
